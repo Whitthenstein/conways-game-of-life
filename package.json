@@ -4,5 +4,6 @@
     "@types/node": "^14.11.2"
   },
   "scripts": {
+    "build": "npx tsc"
   }
 }
