@@ -18,7 +18,7 @@ for (let r = 0; r < NUM_ROWS; r++) {
     nextBoard.push(new Array(NUM_COLS).fill(0));
 }
 const canvas = document.getElementById("app-canvas");
-const ctx = canvas.getContext("2d");
+const context = canvas.getContext("2d");
 const playButton = document.getElementById("play");
 const stopButton = document.getElementById("stop");
 const nextStateButton = document.getElementById("next-state");
@@ -74,24 +74,23 @@ const computeNextBoard = (states, current, next) => {
         }
     }
 };
-const render = (ctx, currentBoard) => {
+const render = (ctx, currBrd) => {
     ctx.fillStyle = DEAD_COLOR;
     ctx.fillRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
     for (let r = 0; r < NUM_ROWS; ++r) {
         for (let c = 0; c < NUM_COLS; ++c) {
             const x = c * CELL_WIDTH;
             const y = r * CELL_HEIGHT;
-            ctx.fillStyle = stateColors[currentBoard[r][c]];
+            ctx.fillStyle = stateColors[currBrd[r][c]];
             ctx.fillRect(x, y, CELL_WIDTH, CELL_HEIGHT);
         }
     }
 };
 let renderInIntervalId;
 const renderInInterval = () => {
-    // console.log("Re-rendering board...");
     computeNextBoard(2, currentBoard, nextBoard);
     switchBoards();
-    render(ctx, currentBoard);
+    render(context, currentBoard);
     renderInIntervalId = setTimeout(renderInInterval, TIME_INTERVAL);
 };
 canvas.addEventListener("click", (e) => {
@@ -103,13 +102,12 @@ canvas.addEventListener("click", (e) => {
     else {
         currentBoard[row][col] = 1;
     }
-    // console.log('clicked', board)
-    render(ctx, currentBoard);
+    render(context, currentBoard);
 });
 nextStateButton.addEventListener("click", () => {
     computeNextBoard(2, currentBoard, nextBoard);
     switchBoards();
-    render(ctx, currentBoard);
+    render(context, currentBoard);
 });
 playButton.addEventListener("click", () => {
     nextStateButton.disabled = true;
@@ -120,11 +118,9 @@ stopButton.addEventListener("click", () => {
     clearTimeout(renderInIntervalId);
 });
 resetButton.addEventListener("click", () => {
-    for (let row of currentBoard) {
-        row.fill(0);
-    }
-    render(ctx, currentBoard);
+    currentBoard = blankBoard;
+    render(context, currentBoard);
     clearTimeout(renderInIntervalId);
     nextStateButton.disabled = false;
 });
-render(ctx, currentBoard);
+render(context, currentBoard);

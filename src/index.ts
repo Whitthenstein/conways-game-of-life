@@ -21,9 +21,8 @@ for (let r = 0; r < NUM_ROWS; r++) {
     nextBoard.push(new Array(NUM_COLS).fill(0));
 }
 
-
 const canvas: HTMLCanvasElement = document.getElementById("app-canvas") as HTMLCanvasElement;
-const ctx: CanvasRenderingContext2D = canvas.getContext("2d") as CanvasRenderingContext2D;
+const context: CanvasRenderingContext2D = canvas.getContext("2d") as CanvasRenderingContext2D;
 const playButton = document.getElementById("play") as HTMLButtonElement;
 const stopButton = document.getElementById("stop") as HTMLButtonElement;
 const nextStateButton = document.getElementById("next-state") as HTMLButtonElement;
@@ -83,7 +82,7 @@ const computeNextBoard = (states: number, current: Board, next: Board) => {
     }
 };
 
-const render = (ctx: CanvasRenderingContext2D, currentBoard: Board) => {
+const render = (ctx: CanvasRenderingContext2D, currBrd: Board) => {
     ctx.fillStyle = DEAD_COLOR;
     ctx.fillRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
 
@@ -91,7 +90,7 @@ const render = (ctx: CanvasRenderingContext2D, currentBoard: Board) => {
         for (let c = 0; c < NUM_COLS; ++c) {
             const x = c*CELL_WIDTH;
             const y = r*CELL_HEIGHT;
-            ctx.fillStyle = stateColors[currentBoard[r][c]];
+            ctx.fillStyle = stateColors[currBrd[r][c]];
             ctx.fillRect(x, y, CELL_WIDTH, CELL_HEIGHT);
 
         }
@@ -100,10 +99,9 @@ const render = (ctx: CanvasRenderingContext2D, currentBoard: Board) => {
 
 let renderInIntervalId: NodeJS.Timeout;
 const renderInInterval = () => {
-    // console.log("Re-rendering board...");
     computeNextBoard(2, currentBoard, nextBoard);
     switchBoards();
-    render(ctx, currentBoard);
+    render(context, currentBoard);
     renderInIntervalId = setTimeout(renderInInterval, TIME_INTERVAL);
 };
 
@@ -116,14 +114,13 @@ canvas.addEventListener("click", (e) => {
         currentBoard[row][col] = 1;
     }
    
-    // console.log('clicked', board)
-    render(ctx, currentBoard);
+    render(context, currentBoard);
 });
 
 nextStateButton.addEventListener("click", () => {
     computeNextBoard(2, currentBoard, nextBoard);
     switchBoards();
-    render(ctx, currentBoard);
+    render(context, currentBoard);
 });
 
 playButton.addEventListener("click", () => {
@@ -137,12 +134,10 @@ stopButton.addEventListener("click", () => {
 });
 
 resetButton.addEventListener("click", () => {
-    for (let row of currentBoard) {
-        row.fill(0)
-    }
-    render(ctx, currentBoard);
+    currentBoard = blankBoard;
+    render(context, currentBoard);
     clearTimeout(renderInIntervalId);
     nextStateButton.disabled = false;
 });
 
-render(ctx, currentBoard);
+render(context, currentBoard);

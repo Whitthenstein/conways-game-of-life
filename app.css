@@ -1,9 +1,14 @@
 body {
+  font-family: 'Roboto', sans-serif;
   background-color: #151515;
   color: #DEDEDE;
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+button {
+  font-family: 'Roboto', sans-serif;
 }
 
 .buttons-wrapper {
