@@ -3,7 +3,7 @@
 This is a simple implementation of this famous cellular automaton written in typescript.
 
 ## Check a live version of the app here:
-<a href="https://whitthenstein.github.io/Conway-s-Game-of-life/" target="_blank">Conway's Game of Life</a>
+[Conway's Game of Life](https://whitthenstein.github.io/Conway-s-Game-of-life/)
 
 ## Run it locally:
 
