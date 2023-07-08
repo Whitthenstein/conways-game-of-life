@@ -2,11 +2,14 @@ import { getViewportSize, getCanvasContext, getPageCanvas } from './Canvas';
 
 type State = number;
 type Board = Array<Array<State>>;
-const stateColors = ['#202020', '#FF5050', '#50FF50', '#5050FF'];
+
+const RED = '#FF5050';
+const GREEN = '#50FF50';
+const BLUE = '#5050FF';
+const DEAD_COLOR = '#202020';
+const stateColors = [DEAD_COLOR, RED, GREEN, BLUE];
 const NUM_ROWS = 64;
 const NUM_COLS = NUM_ROWS;
-const ALIVE_COLOR = '#FF5050';
-const DEAD_COLOR = '#202020';
 
 const TIME_INTERVAL = 100;
 
@@ -89,7 +92,7 @@ const computeNextBoard = (states: number) => {
 const render = () => {
   const canvas = getPageCanvas();
   const ctx = getCanvasContext(canvas);
-  ctx.fillStyle = DEAD_COLOR;
+  ctx.fillStyle = stateColors[0];
   ctx.fillRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
 
   for (let r = 0; r < NUM_ROWS; ++r) {
