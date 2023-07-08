@@ -1,4 +1,4 @@
-import { CANVAS_HEIGHT, CANVAS_WIDTH, getCanvasContext, getPageCanvas } from './Canvas';
+import { getViewportSize, getCanvasContext, getPageCanvas } from './Canvas';
 
 type State = number;
 type Board = Array<Array<State>>;
@@ -9,6 +9,9 @@ const ALIVE_COLOR = '#FF5050';
 const DEAD_COLOR = '#202020';
 
 const TIME_INTERVAL = 100;
+
+let CANVAS_WIDTH = 0;
+let CANVAS_HEIGHT = 0;
 
 let CELL_WIDTH = CANVAS_WIDTH / NUM_COLS;
 let CELL_HEIGHT = CANVAS_HEIGHT / NUM_ROWS;
@@ -22,6 +25,11 @@ for (let r = 0; r < NUM_ROWS; r++) {
   currentBoard.push(new Array(NUM_COLS).fill(0));
   nextBoard.push(new Array(NUM_COLS).fill(0));
 }
+
+const updateCellSize = () => {
+  CELL_WIDTH = CANVAS_WIDTH / NUM_COLS;
+  CELL_HEIGHT = CANVAS_HEIGHT / NUM_ROWS;
+};
 
 const resetBoard = () => {
   currentBoard = BlankBoard;
@@ -107,20 +115,41 @@ const renderInInterval = () => {
 const fillBoardCell = (e: MouseEvent) => {
   const col = Math.floor(e.offsetX / CELL_WIDTH);
   const row = Math.floor(e.offsetY / CELL_HEIGHT);
-  if (currentBoard[row][col] !== 0) {
-    currentBoard[row][col] = 0;
-  } else {
-    currentBoard[row][col] = 1;
+  console.log('test: ', currentBoard, row, col, e.offsetY);
+  if (row >= 0) {
+    if (currentBoard[row][col] !== 0) {
+      currentBoard[row][col] = 0;
+    } else {
+      currentBoard[row][col] = 1;
+    }
+    render();
   }
+};
+
+// update canvas size
+const updateSizes = () => {
+  let viewportSize = getViewportSize();
+  const canvas = getPageCanvas();
+  let ctx = getCanvasContext(canvas);
+  const minimumSize = Math.min(viewportSize.height, viewportSize.width);
+  ctx.canvas.width = minimumSize * 0.8;
+  ctx.canvas.height = ctx.canvas.width;
+
+  CANVAS_WIDTH = ctx.canvas.width;
+  CANVAS_HEIGHT = ctx.canvas.height;
+
+  updateCellSize();
   render();
 };
 
 export {
+  updateCellSize,
   renderInIntervalId,
   computeNextBoard,
   switchBoards,
   resetBoard,
   render,
   renderInInterval,
-  fillBoardCell
+  fillBoardCell,
+  updateSizes,
 };

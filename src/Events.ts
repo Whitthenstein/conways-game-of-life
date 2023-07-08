@@ -8,6 +8,7 @@ import {
   render,
   renderInInterval,
   fillBoardCell,
+  updateSizes,
 } from './Board';
 
 const canvas = getPageCanvas();
@@ -67,6 +68,12 @@ const resetButtonEventHandlers = {
   },
 };
 
+const windowEventHandlers = {
+  resize: () => {
+    updateSizes();
+  },
+};
+
 // Add Events
 bindEventsToElement(document, { mouseup: mouseDragEvents['mouseup'] });
 bindEventsToElement(canvas, mouseDragEvents);
@@ -74,3 +81,4 @@ bindEventsToElement(resetButton, resetButtonEventHandlers);
 bindEventsToElement(nextStateButton, nextStateButtonEvents);
 bindEventsToElement(playButton, playButtonEvents);
 bindEventsToElement(stopButton, stopButtonEvents);
+bindEventsToElement(window, windowEventHandlers);

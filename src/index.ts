@@ -1,8 +1,9 @@
 import './styles.css';
 import './Events';
-import { render } from './Board';
+import { render, updateSizes } from './Board';
 
 const main = () => {
+  updateSizes();
   render();
 };
 

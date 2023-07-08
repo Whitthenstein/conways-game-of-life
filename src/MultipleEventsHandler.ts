@@ -2,7 +2,7 @@ type Actions = {
   [eventName: string]: (e: MouseEvent) => void | Array<(e: MouseEvent) => void>;
 };
 
-const bindEventsToElement = (element: HTMLElement | Document, actions: Actions) => {
+const bindEventsToElement = (element: HTMLElement | Document | Window, actions: Actions) => {
   Object.entries(actions).forEach(([eventName, handle]) => {
     const event = eventName as keyof DocumentEventMap;
 
