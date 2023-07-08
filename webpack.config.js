@@ -27,6 +27,7 @@ module.exports = {
 )],
   devServer: {
     static: './public',
+    open: true
   },
   output: {
     filename: 'bundle.js',

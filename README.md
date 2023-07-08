@@ -20,9 +20,14 @@ cd Conway-s-Game-of-life
 npm i
 ```
 
+* Build the project:
+```bash
+npm run build
+```
+
 * Run a simple webserver with python (for example):
 ```bash
 python3 -m http.server 8080
 ```
 
-* Typing `localhost:8080/app.html` in your browser.
+* Typing `localhost:8080/public/index.html` in your browser.
