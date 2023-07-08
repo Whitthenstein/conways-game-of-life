@@ -3,7 +3,7 @@ import './Events';
 import { render } from './Board';
 
 const main = () => {
-    render();
+  render();
 };
 
 main();
