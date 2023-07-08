@@ -42,7 +42,9 @@ const stopButtonEvents = {
 };
 
 const mouseDragEvents = {
-  mousedown: () => (mouseDrag = true),
+  mousedown: () => {
+    mouseDrag = true;
+  },
   mousemove: (e: MouseEvent) => {
     if (mouseDrag) {
       fillBoardCell(e);

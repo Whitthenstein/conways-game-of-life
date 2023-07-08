@@ -1,6 +1,6 @@
-interface Actions {
-  [eventName: string]: Function | Array<Function>;
-}
+type Actions = {
+  [eventName: string]: (e: MouseEvent) => void | Array<(e: MouseEvent) => void>;
+};
 
 const bindEventsToElement = (element: HTMLElement | Document, actions: Actions) => {
   Object.entries(actions).forEach(([eventName, handle]) => {

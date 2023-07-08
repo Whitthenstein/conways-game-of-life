@@ -12,22 +12,22 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        use: ['style-loader', 'css-loader']
-    }
+        use: ['style-loader', 'css-loader'],
+      },
     ],
   },
   resolve: {
     extensions: ['.tsx', '.ts', '.js'],
   },
-  plugins: [new HtmlWebpackPlugin(
-    {
-        title: 'Game of Life',
-        template: './src/index.html'
-    }
-)],
+  plugins: [
+    new HtmlWebpackPlugin({
+      title: 'Game of Life',
+      template: './src/index.html',
+    }),
+  ],
   devServer: {
     static: './public',
-    open: true
+    open: true,
   },
   output: {
     filename: 'bundle.js',
