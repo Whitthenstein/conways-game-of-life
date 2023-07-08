@@ -1,5 +1,5 @@
-import { getPageCanvas } from './Canvas';
-import { bindEventsToElement } from './MultipleEventsHandler';
+import { getPageCanvas } from './Components/Canvas';
+import { bindEventsToElement } from './Utils/MultipleEventsHandler';
 import {
   renderInIntervalId,
   computeNextBoard,
@@ -9,7 +9,7 @@ import {
   renderInInterval,
   fillBoardCell,
   updateSizes,
-} from './Board';
+} from './Components/Board';
 
 const canvas = getPageCanvas();
 const playButton = document.getElementById('play') as HTMLButtonElement;
