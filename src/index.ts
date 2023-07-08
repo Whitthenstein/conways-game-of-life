@@ -1,3 +1,5 @@
+import './styles.css';
+
 const ALIVE_COLOR = "#FF5050";
 const DEAD_COLOR = "#202020";
 const NUM_ROWS = 64;
@@ -105,16 +107,18 @@ const renderInInterval = () => {
     renderInIntervalId = setTimeout(renderInInterval, TIME_INTERVAL);
 };
 
-canvas.addEventListener("click", (e) => {
-    const col = Math.floor(e.offsetX/CELL_WIDTH);
-    const row = Math.floor(e.offsetY/CELL_HEIGHT);
-    if (currentBoard[row][col] !== 0) {
-        currentBoard[row][col] = 0;
-    } else {
-        currentBoard[row][col] = 1;
-    }
-   
-    render(context, currentBoard);
+canvas.addEventListener("click", () => {
+    canvas.addEventListener("mousemove", (e) => {
+        // const event = e as MouseEvent;
+        const col = Math.floor(e.offsetX/CELL_WIDTH);
+        const row = Math.floor(e.offsetY/CELL_HEIGHT);
+        if (currentBoard[row][col] !== 0) {
+            currentBoard[row][col] = 0;
+        } else {
+            currentBoard[row][col] = 1;
+        }
+        render(context, currentBoard);
+    })
 });
 
 nextStateButton.addEventListener("click", () => {
