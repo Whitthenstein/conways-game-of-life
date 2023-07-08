@@ -2,6 +2,9 @@
 
 This is a simple implementation of this famous cellular automaton written in typescript.
 
+## Check a live version of the app here:
+[Conway's Game of Life](https://whitthenstein.github.io/Conway-s-Game-of-life/)
+
 ## Run it locally:
 
 You can run this locally by:
