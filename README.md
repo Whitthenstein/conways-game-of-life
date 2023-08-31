@@ -13,7 +13,7 @@ You can run this locally by:
 git clone https://github.com/Whitthenstein/Conway-s-Game-of-life.git
 ```
 
-* Change to the projects directory:
+* Changing to the projects directory:
 ```bash
 cd Conway-s-Game-of-life
 ```
@@ -23,12 +23,12 @@ cd Conway-s-Game-of-life
 npm i
 ```
 
-* Build the project:
+* Building the project:
 ```bash
 npm run build
 ```
 
-* Run a simple webserver with python (for example):
+* Running a simple webserver with python (for example):
 ```bash
 python3 -m http.server 8080
 ```
